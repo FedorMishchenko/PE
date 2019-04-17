@@ -4,8 +4,9 @@ public class Part7 {
     public static void main(String[] args) {
         System.out.println();
         digits2chars(args);
-        defineRightColumnByDigit((int) (Math.random() * 100));
+        defineRightColumnByDigit(100);
         chars2digit("AAA");
+        defineRightColumnByChar("AAA");
     }
 
     private static void digits2chars(String... param) {
@@ -23,19 +24,31 @@ public class Part7 {
     }
 
     private static void chars2digit(String param) {
-        System.out.printf("%s%n","chars to digits:");
+        System.out.printf("%s%n", "chars to digits:");
+        int result = strToInt(param);
+        digits2chars(String.valueOf(result));
+        System.out.println();
+    }
+
+    private static int strToInt(String param) {
         int result = charToInt(param.charAt(param.length() - 1));
         int row = 1;
         for (int i = param.length() - 2; i >= 0; i--) {
             result += Math.pow(26, row) * charToInt(param.charAt(i));
             row++;
         }
-        digits2chars(String.valueOf(result));
-        System.out.println();
+        return result;
+    }
+
+    private static void defineRightColumnByChar(String param) {
+        System.out.printf("%n%s%n ","define right column by char:");
+        int result = strToInt(param);
+        digits2chars(String.valueOf(++result));
+
     }
 
     private static void defineRightColumnByDigit(int columnNumber) {
-        System.out.printf("%n%s%d%n%s%n", "column index = ", columnNumber, "define right column:");
+        System.out.printf("%n%s%d%n%s%n", "column index = ", columnNumber, "define right column by digit:");
         String[] number = new String[]{String.valueOf(columnNumber + 1)};
         digits2chars(number);
         System.out.println();
