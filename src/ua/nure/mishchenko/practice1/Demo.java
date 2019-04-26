@@ -1,4 +1,4 @@
-import ua.nure.mishchenko.practice1.*;
+package ua.nure.mishchenko.practice1;
 
 public class Demo {
     public static void main(String[] args) {
