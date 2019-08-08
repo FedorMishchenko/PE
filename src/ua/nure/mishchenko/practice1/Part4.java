@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public class Part4 {
     public static void main(String[] args) {
-        System.out.printf("%n%d%n", findGreatestCommonDivisor(args));
+        System.out.printf("%d%n", findGreatestCommonDivisor(args));
     }
 
     private static int findGreatestCommonDivisor(int value1, int value2) {
@@ -16,7 +16,7 @@ public class Part4 {
         return value1;
     }
 
-    private static int findGreatestCommonDivisor(String... param) {
+    private static int findGreatestCommonDivisor(String[] param) {
         int[] numbers = Stream.of(param)
                 .mapToInt(Integer::valueOf)
                 .filter(x -> x > 0)

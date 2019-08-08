@@ -1,57 +1,44 @@
 package ua.nure.mishchenko.practice1;
 
 public class Part7 {
+    private static final String[] DEFAULT_VALUE =
+            {"1","2","26","27","52","53","702","703"};
+    private static final int NUM_SYSTEM = 26;
+    private static final int CONST = 65;
     public static void main(String[] args) {
-        System.out.println();
-        digits2chars(args);
-        defineRightColumnByDigit(100);
-        chars2digit("AAA");
-        defineRightColumnByChar("AAA");
-    }
-
-    private static void digits2chars(String... param) {
-        for (String str : param) {
-            int number = Integer.parseInt(str);
-            String res = "";
-            for (int i = number; i != 0; i = (i - 1) / 26)
-                res = String.format("%c%s", ((i - 1) % 26 + 65), res);
-            System.out.printf("%-3s%4s%4s%4s%4s%n", res, "==>", number, "==>", res);
+        if(("EMPTY").equals(args[0])){
+            args = DEFAULT_VALUE;
+        }
+        int[] numbers = new int[args.length];
+        for (int i = 0; i < args.length; i++){
+            numbers[i] = Integer.parseInt(args[i]);
+        }
+        for (int i: numbers){
+            System.out.println(int2str(i) + " ==> " + str2int(int2str(i)) + " ==> " + int2str(i));
         }
     }
 
-    private static int charToInt(char character) {
-        return (character - 'A' + 1);
+    public static String int2str(int number){
+        String res = "";
+        for (int i = number; i != 0; i = (i - 1) / NUM_SYSTEM) {
+            res = String.format("%c%s", ((i - 1) % NUM_SYSTEM + CONST), res);
+        }
+        return res;
     }
 
-    private static void chars2digit(String param) {
-        System.out.printf("%s%n", "chars to digits:");
-        int result = strToInt(param);
-        digits2chars(String.valueOf(result));
-        System.out.println();
-    }
-
-    private static int strToInt(String param) {
-        int result = charToInt(param.charAt(param.length() - 1));
+    public static int str2int(String param) {
+        int result = ((param.charAt(param.length() - 1)) - 'A' + 1);
         int row = 1;
         for (int i = param.length() - 2; i >= 0; i--) {
-            result += Math.pow(26, row) * charToInt(param.charAt(i));
+            result += Math.pow(NUM_SYSTEM, row) * ((param.charAt(i)) - 'A' + 1);
             row++;
         }
         return result;
     }
 
-    private static void defineRightColumnByChar(String param) {
-        System.out.printf("%n%s%n ","define right column by char:");
-        int result = strToInt(param);
-        digits2chars(String.valueOf(++result));
-
-    }
-
-    private static void defineRightColumnByDigit(int columnNumber) {
-        System.out.printf("%n%s%d%n%s%n", "column index = ", columnNumber, "define right column by digit:");
-        String[] number = new String[]{String.valueOf(columnNumber + 1)};
-        digits2chars(number);
-        System.out.println();
+    public static String rightColumn(String param) {
+        int result = str2int(param);
+        return int2str(++result);
     }
 
 }

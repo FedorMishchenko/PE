@@ -1,10 +1,12 @@
 package ua.nure.mishchenko.practice1;
 
-import java.util.stream.Stream;
-
 public class Part3 {
     public static void main(String[] args) {
-        Stream.of(args)
-                .forEach(x -> System.out.printf("%s ",x));
+       StringBuilder sb =  new StringBuilder(" ");
+        for (String arg : args) {
+            sb.append(arg);
+            sb.append(" ");
+        }
+        System.out.println(sb.toString().trim());
     }
 }

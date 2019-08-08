@@ -6,7 +6,7 @@ public class Part5 {
     public static void main(String[] args) {
         System.out.printf("%d%n",findSumOfDigitsInNumber(args));
     }
-    private static int findSumOfDigitsInNumber(String...source){
+    private static int findSumOfDigitsInNumber(String[] source){
         return Pattern.compile("")
                 .splitAsStream(source[0])
                 .mapToInt(Integer::valueOf)
